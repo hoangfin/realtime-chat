@@ -1,21 +1,21 @@
-import { Divider, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 export function AuthPage(): JSX.Element {
 	return (
-		<Stack width="100%" direction={{ sm: "column", md: "row" }} alignItems="center">
+		<Stack width="100%" direction={{ xs: "column", md: "row" }} alignItems="center">
 			<Stack flex={1} justifyContent="center" alignItems="center">
 				<LoginForm />
 			</Stack>
-			<Divider
-				// orientation={{ sm: "horizontal", md: "vertical" }}
+			
+			<Box
 				aria-hidden="true"
-				sx={{
-					md: { width: "80%" },
-					backgroundColor: "#dddddd35"
-				}}
+				bgcolor="divider"
+				width={{ xs: "80%", md: "1px" }}
+				height={{ xs: "1px", md: "80%" }}
 			/>
+
 			<Stack flex={1} justifyContent="center" alignItems="center">
 				<RegisterForm />
 			</Stack>
