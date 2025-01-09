@@ -1,23 +1,18 @@
-import { Context, createContext, ReactNode, useContext, useState } from "react";
-
-type User = {
-	id: number;
-	name: string;
-	email: string;
-};
+import { createContext, PropsWithChildren, useContext, useState } from "react";
+import { UserInfo } from "firebase/auth";
 
 type AuthContextProps = {
-	user: User | null;
-	login: (user: User) => void;
+	user: UserInfo | null;
+	login: (user: UserInfo) => void;
 	logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-	const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children }: PropsWithChildren) {
+	const [user, setUser] = useState<UserInfo | null>(null);
 
-	const login = (user: User) => setUser(user);
+	const login = (user: UserInfo) => setUser(user);
 	const logout = () => setUser(null);
 
 	return (
@@ -27,7 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	);
 }
 
-export const useAuth: () => AuthContextProps | undefined = () => {
+export function useAuth(): AuthContextProps | undefined {
 	const context = useContext(AuthContext);
 	return context;
 }
