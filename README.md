@@ -1,6 +1,6 @@
 # 🚀 **Project Launching Soon**
 
-![Coming Soon](https://www.clipartmax.com/png/middle/122-1228777_insurance-from-pro-insurance-agency-inc-coming-soon-funny-cartoons.png)
+![Coming Soon](https://media.istockphoto.com/id/1310496929/vector/coming-soon-label.jpg?s=612x612&w=0&k=20&c=Jt9nyCzsOv0NHj1x2i94MlkZKkuclmY2oT78r4c25zY=)
 
 ---
 
@@ -8,6 +8,8 @@
 I’m working hard to bring this project to life and can't wait to share it with you ❤️
 
 ### 🎉 **What to Expect**
-- **Realtime chat**
+- **Real-time chat**
+- **File transfer**
+- **User block**
 - **Responsive UI**
 - **User authentication and registration**
