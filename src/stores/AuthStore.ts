@@ -1,89 +1,62 @@
 import { create } from "zustand";
-import { auth } from "@src/lib/firebase";
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	signOut
-} from "firebase/auth";
+import { auth, createUser, getUser } from "@src/services/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { User } from "@src/types";
 
-type User = {
-	username: string;
-    email: string;
-    id: string;
-    avatarURL: string | null;
-	// lastSeen: Date
-};
-
-type AuthStore = {
+type AuthState = {
 	user: User | null;
-	register: (email: string, password: string) => Promise<void>;
+	setUser: (user: User | null) => void;
+	register: (username: string, email: string, password: string) => Promise<void>;
 	login: (email: string, password: string) => Promise<void>;
 	logout: () => Promise<void>;
 	isRegistering: boolean;
 	isLoggingIn: boolean;
 	isLoggingOut: boolean;
+	setIsLoggingIn: (value: boolean) => void;
 };
 
-export const authStore = create<AuthStore>((set) => {
-	const user = null;
-
-	const register = async (email: string, password: string) => {
-		set((authStore) => ({ ...authStore, isRegistering: true }), true);
+export const useAuth = create<AuthState>((set) => {
+	const register = async (username: string, email: string, password: string) => {
+		set(() => ({ isRegistering: true }));
 
 		try {
 			const { user: firebaseUser } = await createUserWithEmailAndPassword(auth, email, password);
-
-			const user: User = {
-				username: firebaseUser.displayName!,
-				email: firebaseUser.email!,
-				id: firebaseUser.uid,
-				avatarURL: firebaseUser.photoURL
-				// lastSeen: firebaseUser.metadata.lastSignInTime
-			};
-			set((authStore) => ({ ...authStore, user, isRegistering: false }), true);
+			const user = await createUser(username, firebaseUser.email!, firebaseUser.uid);
+			set(() => ({ user, isRegistering: false }));
 		} catch (error) {
-			set((authStore) => ({ ...authStore, isRegistering: false }), true);
+			set(() => ({ isRegistering: false }));
 			throw error;
 		}
 	};
 
 	const login = async (email: string, password: string) => {
-		set((authStore) => ({ ...authStore, isLoggingIn: true }), true);
+		set(() => ({ isLoggingIn: true }));
 
 		try {
 			const { user: firebaseUser } = await signInWithEmailAndPassword(auth, email, password);
-
-			const user: User = {
-				username: firebaseUser.displayName!,
-				email: firebaseUser.email!,
-				id: firebaseUser.uid,
-				avatarURL: firebaseUser.photoURL
-				// lastSeen: firebaseUser.metadata.lastSignInTime
-			};
-			set((authStore) => ({ ...authStore, user, isLoggingIn: false }), true);
+			const user = await getUser(firebaseUser.uid);
+			set(() => ({ user, isLoggingIn: false }));
 		} catch (error) {
-			set((authStore) => ({ ...authStore, isLoggingIn: false }), true);
+			set(() => ({ isLoggingIn: false }));
 			throw error;
 		}
 	};
 
 	const logout = async () => {
-		set((authStore) => ({ ...authStore, isLoggingOut: true }), true);
+		set(() => ({ isLoggingOut: true }));
 		await signOut(auth);
-		set((authStore) => ({ ...authStore, isLoggingOut: false }), true);
+		set(() => ({ isLoggingOut: false }));
 	};
 
 	return {
-		user,
+		user: null,
+		setUser: (user: User | null) => set({ user }),
 		register,
 		login,
 		logout,
 		isRegistering: false,
 		isLoggingIn: false,
-		isLoggingOut: false
+		isLoggingOut: false,
+		setIsLoggingIn: (value: boolean) => set({ isLoggingIn: value })
 	};
 });
-
-export function useAuth() {
-	return authStore(shallow)
-}
