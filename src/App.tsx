@@ -1,10 +1,12 @@
 import { Container, createTheme, SxProps, ThemeProvider } from "@mui/material";
 import { AuthPage } from "@src/components/pages";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { auth, getUser } from "./services/firebase";
+import { useAuth } from "./stores/AuthStore";
 
 const theme = createTheme({
-	palette: {
-		mode: "dark"
-	}
+	palette: { mode: "dark" }
 });
 
 const containerSx: SxProps = {
@@ -19,7 +21,37 @@ const containerSx: SxProps = {
 	borderRadius: "12px"
 };
 
+useAuth.getInitialState().isLoggingIn = true;
+
 export default function App() {
+	const isLoggingIn = useAuth((state) => state.isLoggingIn);
+	const setIsLoggingIn = useAuth((state) => state.setIsLoggingIn);
+	const setUser = useAuth((state) => state.setUser);
+
+	console.log(`isLoggingIn = ${isLoggingIn}`);
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
+			if (authUser) {
+				try {
+					const user = await getUser(authUser.uid);
+					setUser(user);
+				} catch (error) {
+
+				}
+			}
+			console.log("setIsLoggingIn()");
+			setIsLoggingIn(false);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, [onAuthStateChanged, getUser, setUser, setIsLoggingIn]);
+
+	if (isLoggingIn) {
+		return <h1>...Loading</h1>;
+	}
 
 	return (
 		<ThemeProvider theme={theme}>
