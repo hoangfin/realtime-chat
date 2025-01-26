@@ -7,7 +7,10 @@ export default defineConfig({
 	plugins: [react()],
 
 	resolve: {
-		alias: { "@src": path.resolve(__dirname, "src") },
-		extensions: [".mjs", ".js", ".mts", ".ts", ".jsx", ".tsx", ".json"]
+		alias: { "@src": path.resolve(__dirname, "src") }
+	},
+
+	server: {
+		open: true
 	}
 });
