@@ -1,13 +1,10 @@
-import { Container, createTheme, SxProps, ThemeProvider } from "@mui/material";
+import { Container, SxProps, ThemeProvider } from "@mui/material";
 import { AuthPage } from "@src/components/pages";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth, getUser } from "./services/firebase";
 import { useAuth } from "./stores/AuthStore";
-
-const theme = createTheme({
-	palette: { mode: "dark" }
-});
+import { theme } from "./theme";
 
 const containerSx: SxProps = {
 	width: "80vw",
