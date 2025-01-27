@@ -1,7 +1,17 @@
-import { LoadingButton } from "@mui/lab";
-import { Stack, StackProps, TextField, Typography } from "@mui/material";
+import { Button, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
 import { useAuth } from "@src/stores/AuthStore";
 import { FormEvent } from "react";
+
+const HiddenInput = styled("input")({
+	position: "absolute",
+	bottom: 0,
+	left: 0,
+	width: 1,
+	height: 1,
+	overflow: "hidden",
+	clipPath: "inset(50%)",
+	whiteSpace: "nowrap"
+});
 
 export function RegisterForm(props: StackProps): JSX.Element {
 	const register = useAuth((state) => state.register);
@@ -23,13 +33,21 @@ export function RegisterForm(props: StackProps): JSX.Element {
 		<div>
 			<Typography component="h2" variant="h5" marginBottom={2}>Register</Typography>
 			<Stack component="form" onSubmit={handleRegister} spacing={3} {...props}>
-				<input type="file" id="avatar" />
-				<TextField type="text" placeholder="Username" name="username" />
-				<TextField type="email" placeholder="Email" name="email" required />
+				<Button
+					component="label"
+					role={undefined}
+					variant="contained"
+					tabIndex={-1}
+				>
+					upload avatar
+					<HiddenInput type="file" />
+				</Button>
+				<TextField type="text" name="username" />
+				<TextField type="email" name="email" required />
 				<TextField type="password" placeholder="Password" name="password" required />
-				<LoadingButton type="submit" loading={isRegistering} variant="contained">
+				<Button type="submit" loading={isRegistering} variant="contained">
 					Sign Up
-				</LoadingButton>
+				</Button>
 			</Stack>
 		</div>
 	);

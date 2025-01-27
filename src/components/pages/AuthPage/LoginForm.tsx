@@ -1,5 +1,4 @@
-import { LoadingButton } from "@mui/lab";
-import { Stack, StackProps, TextField, Typography } from "@mui/material";
+import { Button, Stack, StackProps, TextField, Typography } from "@mui/material";
 import { FormEvent } from "react";
 
 export function LoginForm(props: StackProps): JSX.Element {
@@ -13,11 +12,11 @@ export function LoginForm(props: StackProps): JSX.Element {
 		<div>
 			<Typography component="h2" variant="h5" marginBottom={2}>Welcome back</Typography>
 			<Stack component="form" onSubmit={handleSubmit} spacing={3} {...props}>
-				<TextField type="email" placeholder="Email" required />
-				<TextField type="password" placeholder="Password" required />
-				<LoadingButton type="submit" variant="contained">
-					Sign In
-				</LoadingButton>
+				<TextField type="email" label="Email" size="small" required />
+				<TextField type="password" label="Password" size="small" required />
+				<Button type="submit" variant="contained">
+					sign in
+				</Button>
 			</Stack>
 		</div>
 	);
