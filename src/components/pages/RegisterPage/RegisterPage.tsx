@@ -13,7 +13,7 @@ const HiddenInput = styled("input")({
 	whiteSpace: "nowrap"
 });
 
-export function RegisterForm(props: StackProps): JSX.Element {
+export function RegisterPage(props: StackProps): JSX.Element {
 	const register = useAuth((state) => state.register);
 	const isRegistering = useAuth((state) => state.isRegistering);
 
