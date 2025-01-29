@@ -1,4 +1,4 @@
-:root {
+/* :root {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -9,4 +9,16 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+} */
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#root {
+	flex: 1
 }

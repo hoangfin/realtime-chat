@@ -1,10 +1,11 @@
-import { Container, SxProps, ThemeProvider } from "@mui/material";
-import { AuthPage } from "@src/components/pages";
+import { SxProps } from "@mui/material";
+import { RegisterPage } from "@src/components/pages";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
+import { Route, Routes } from "react-router";
+import { LoginPage } from "./components/pages/LoginPage";
 import { auth, getUser } from "./services/firebase";
 import { useAuth } from "./stores/AuthStore";
-import { theme } from "./theme";
 
 const containerSx: SxProps = {
 	width: "80vw",
@@ -51,10 +52,11 @@ export default function App() {
 	}
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Container sx={containerSx}>
-				<AuthPage />
-			</Container>
-		</ThemeProvider>
+		<Routes>
+			<Route path="/" element={<div>Home</div>} />
+			<Route path="/login" element={<LoginPage />} />
+			<Route path="/register" element={<RegisterPage />} />
+			<Route path="*" />
+		</Routes>
 	);
 };
