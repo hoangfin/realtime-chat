@@ -13,6 +13,10 @@ export const theme = createTheme({
 
 	components: {
 		MuiButton: {
+			defaultProps: {
+				size: "small",
+				variant: "contained"
+			},
 			styleOverrides: {
 				root: {
 					fontWeight: 600,
