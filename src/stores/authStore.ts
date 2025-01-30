@@ -6,29 +6,18 @@ import { User } from "@src/types";
 type AuthState = {
 	user: User | null;
 	setUser: (user: User | null) => void;
-	register: (username: string, email: string, password: string) => Promise<void>;
 	login: (email: string, password: string) => Promise<void>;
 	logout: () => Promise<void>;
-	isRegistering: boolean;
+	register: (username: string, email: string, password: string) => Promise<void>;
 	isLoggingIn: boolean;
 	isLoggingOut: boolean;
-	setIsLoggingIn: (value: boolean) => void;
+	isRegistering: boolean;
+	setLoggingIn: (value: boolean) => void;
+	setLoggingOut: (value: boolean) => void;
+	setRegistering: (value: boolean) => void;
 };
 
 export const useAuth = create<AuthState>((set) => {
-	const register = async (username: string, email: string, password: string) => {
-		set(() => ({ isRegistering: true }));
-
-		try {
-			const { user: firebaseUser } = await createUserWithEmailAndPassword(auth, email, password);
-			const user = await createUser(username, firebaseUser.email!, firebaseUser.uid);
-			set(() => ({ user, isRegistering: false }));
-		} catch (error) {
-			set(() => ({ isRegistering: false }));
-			throw error;
-		}
-	};
-
 	const login = async (email: string, password: string) => {
 		set(() => ({ isLoggingIn: true }));
 
@@ -48,15 +37,30 @@ export const useAuth = create<AuthState>((set) => {
 		set(() => ({ isLoggingOut: false }));
 	};
 
+	const register = async (username: string, email: string, password: string) => {
+		set(() => ({ isRegistering: true }));
+
+		try {
+			const { user: firebaseUser } = await createUserWithEmailAndPassword(auth, email, password);
+			const user = await createUser(username, firebaseUser.email!, firebaseUser.uid);
+			set(() => ({ user, isRegistering: false }));
+		} catch (error) {
+			set(() => ({ isRegistering: false }));
+			throw error;
+		}
+	};
+
 	return {
 		user: null,
 		setUser: (user: User | null) => set({ user }),
-		register,
 		login,
 		logout,
-		isRegistering: false,
+		register,
 		isLoggingIn: false,
 		isLoggingOut: false,
-		setIsLoggingIn: (value: boolean) => set({ isLoggingIn: value })
+		isRegistering: false,
+		setLoggingIn: (value: boolean) => set({ isLoggingIn: value }),
+		setLoggingOut: (value: boolean) => set({ isLoggingOut: value }),
+		setRegistering: (value: boolean) => set({ isRegistering: value })
 	};
 });
