@@ -1,5 +1,5 @@
 import { Button, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
-import { useAuth } from "@src/stores/AuthStore";
+import { useAuth } from "@src/stores";
 import { FormEvent } from "react";
 
 const HiddenInput = styled("input")({
