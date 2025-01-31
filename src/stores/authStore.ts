@@ -4,17 +4,21 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { User } from "@src/types";
 
 type AuthState = {
-	user: User | null;
-	setUser: (user: User | null) => void;
-	login: (email: string, password: string) => Promise<void>;
-	logout: () => Promise<void>;
-	register: (username: string, email: string, password: string) => Promise<void>;
-	isLoggingIn: boolean;
-	isLoggingOut: boolean;
-	isRegistering: boolean;
-	setLoggingIn: (value: boolean) => void;
-	setLoggingOut: (value: boolean) => void;
-	setRegistering: (value: boolean) => void;
+	user: User | null,
+	setUser: (user: User | null) => void,
+	login: (email: string, password: string) => Promise<void>,
+	logout: () => Promise<void>,
+	register: (username: string, email: string, password: string) => Promise<void>,
+	isLoggingIn: boolean,
+	isLoggingOut: boolean,
+	isRegistering: boolean,
+	setLoggingIn: (value: boolean) => void,
+	setLoggingOut: (value: boolean) => void,
+	setRegistering: (value: boolean) => void,
+	loginError: Error | null,
+	registerError: Error | null,
+	setLoginError: (error: Error | null) => void,
+	setRegisterError: (error: Error | null) => void
 };
 
 export const useAuth = create<AuthState>((set) => {
@@ -26,8 +30,9 @@ export const useAuth = create<AuthState>((set) => {
 			const user = await getUser(firebaseUser.uid);
 			set(() => ({ user, isLoggingIn: false }));
 		} catch (error) {
-			set(() => ({ isLoggingIn: false }));
-			throw error;
+			const err = new Error((error as { message: string }).message);
+			set(() => ({ isLoggingIn: false, loginError: err }));
+			throw err;
 		}
 	};
 
@@ -45,8 +50,9 @@ export const useAuth = create<AuthState>((set) => {
 			const user = await createUser(username, firebaseUser.email!, firebaseUser.uid);
 			set(() => ({ user, isRegistering: false }));
 		} catch (error) {
-			set(() => ({ isRegistering: false }));
-			throw error;
+			const err = new Error((error as { message: string }).message);
+			set(() => ({ isRegistering: false, registerError: err }));
+			throw err;
 		}
 	};
 
@@ -61,6 +67,10 @@ export const useAuth = create<AuthState>((set) => {
 		isRegistering: false,
 		setLoggingIn: (value: boolean) => set({ isLoggingIn: value }),
 		setLoggingOut: (value: boolean) => set({ isLoggingOut: value }),
-		setRegistering: (value: boolean) => set({ isRegistering: value })
+		setRegistering: (value: boolean) => set({ isRegistering: value }),
+		loginError: null,
+		registerError: null,
+		setLoginError: (error: Error | null) => set({ loginError: error }),
+		setRegisterError: (error: Error | null) => set({ registerError: error }),
 	};
 });
