@@ -5,7 +5,9 @@
 ---
 
 ### 🙏 **Thank You for Stopping By!**
-I’m working hard to bring this project to life and can't wait to share it with you ❤️
+I’m working hard to bring this project to life and can't wait to share it with you ❤️<br />
+In the meantime, feel free to explore the source code if you're interested.<br />
+Your feedback and contributions are always welcome.
 
 ### 🎉 **What to Expect**
 - **Real-time chat**
