@@ -84,4 +84,4 @@ export function LoginPage(): JSX.Element {
 			</Dialog>
 		</>
 	);
-}
+};

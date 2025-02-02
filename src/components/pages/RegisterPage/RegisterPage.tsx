@@ -51,4 +51,4 @@ export function RegisterPage(props: StackProps): JSX.Element {
 			</Stack>
 		</div>
 	);
-}
+};
