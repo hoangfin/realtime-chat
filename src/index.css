@@ -12,6 +12,8 @@
 } */
 
 body {
+	width: 100vw;
+	height: 100vh;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -20,5 +22,5 @@ body {
 }
 
 #root {
-	flex: 1
+	/* flex: 1 */
 }
