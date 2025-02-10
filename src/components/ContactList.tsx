@@ -5,18 +5,23 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemButton,
-	ListItemText
+	ListItemText,
+	ListProps
 } from "@mui/material";
 
-export function ContactList(): JSX.Element {
+type ContactListProps = ListProps & {
+	// contacts: Contact[]
+};
+
+export function ContactList(props: ContactListProps): JSX.Element {
 	return (
-		<List>
+		<List {...props}>
 			<ListItem disablePadding>
 				<ListItemButton>
 					<ListItemAvatar>
 						<Avatar src="" />
 					</ListItemAvatar>
-					<ListItemText primary="Juda Copilot"></ListItemText>
+					<ListItemText primary="Juda Copilot" secondary="Wow it is amazing"></ListItemText>
 				</ListItemButton>
 			</ListItem>
 			<Divider component="li" />

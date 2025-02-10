@@ -13,22 +13,12 @@ export const theme = createTheme({
 
 	components: {
 		MuiButton: {
-			defaultProps: {
-				size: "small",
-				variant: "contained"
-			},
 			styleOverrides: {
 				root: {
 					fontWeight: 600,
 					fontSize: "1.15rem",
-					textTransform: "lowercase"
+					textTransform: "none"
 				}
-			}
-		},
-
-		MuiTextField: {
-			defaultProps: {
-				size: "small"
 			}
 		}
 	},

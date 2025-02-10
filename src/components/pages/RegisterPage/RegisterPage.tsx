@@ -1,4 +1,4 @@
-import { Button, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
+import { Button, Stack, StackProps, styled, SxProps, TextField, TextFieldProps, Typography } from "@mui/material";
 import { useAuth } from "@src/stores";
 import { FormEvent } from "react";
 
@@ -13,6 +13,13 @@ const HiddenInput = styled("input")({
 	whiteSpace: "nowrap"
 });
 
+const textFieldProps: TextFieldProps = {
+	size: "small",
+	sx: {
+		"& fieldset": { borderRadius: 5 }
+	}
+};
+
 export function RegisterPage(props: StackProps): JSX.Element {
 	const register = useAuth((state) => state.register);
 	const isRegistering = useAuth((state) => state.isRegistering);
@@ -20,18 +27,24 @@ export function RegisterPage(props: StackProps): JSX.Element {
 	const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-		const { username, email, password } = Object.fromEntries(formData);
+
+		const { username, email, password } = Object.fromEntries(formData) as {
+			username: string,
+			email: string,
+			password: string
+		};
 
 		try {
-			await register(username as string, email as string, password as string);
+			await register(username, email, password);
+
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	return (
-		<div>
-			<Typography component="h2" variant="h5" marginBottom={2}>Register</Typography>
+		<main>
+			<Typography component="h1" variant="h5" marginBottom={2}>Create an account</Typography>
 			<Stack component="form" onSubmit={handleRegister} spacing={3} {...props}>
 				<Button
 					component="label"
@@ -42,13 +55,13 @@ export function RegisterPage(props: StackProps): JSX.Element {
 					upload avatar
 					<HiddenInput type="file" />
 				</Button>
-				<TextField type="text" name="username" />
-				<TextField type="email" name="email" required />
-				<TextField type="password" placeholder="Password" name="password" required />
-				<Button type="submit" loading={isRegistering} variant="contained">
-					Sign Up
+				<TextField type="text" name="username" label="Username" {...textFieldProps} />
+				<TextField type="email" name="email" label="Email" {...textFieldProps} />
+				<TextField type="password" name="password" label="Password" {...textFieldProps} />
+				<Button type="submit" loading={isRegistering} variant="contained" size="small">
+					Submit
 				</Button>
 			</Stack>
-		</div>
+		</main>
 	);
 };

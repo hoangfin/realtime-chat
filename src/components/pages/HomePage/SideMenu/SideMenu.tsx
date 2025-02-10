@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import { ActionBar } from "./ActionBar";
-import { ContactList } from "./ContactList";
+import { ContactList } from "@src/components";
 import { SearchBar } from "./SearchBar";
 
 export function SideMenu(): JSX.Element {
