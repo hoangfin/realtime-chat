@@ -17,7 +17,12 @@ import { AccountCenter } from "./AccountCenter";
 
 export function HomePage(): JSX.Element {
 	return (
-		<Stack component="main">
+		<Stack
+			component="main"
+			// width="95vw"
+			// height="95vh"
+			direction="row"
+		>
 			<SideMenu />
 			<Chat />
 			<AccountCenter />

@@ -12,6 +12,9 @@
 } */
 
 body {
+	width: 100vw;
+	min-height: 100vh;
+	min-height: 100dvh;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -19,6 +22,6 @@ body {
 	align-items: center;
 }
 
-#root {
+/* #root {
 	flex: 1
-}
+} */
