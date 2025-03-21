@@ -1,4 +1,10 @@
 # Realtime Chat
+An ultimate full-stack project built with a **Modular Monolith** architecture, utilizing:
+- **React/TypeScript** | **Material UI** for the front end.
+- **Kafka** | **Redis** | **PostgreSQL** for backend services.
+
+It delivers low-latency messaging, real-time presence tracking, and a responsive user interface.
+Designed to handle millions of users, it showcases my expertise in full-stack development and modern system design.
 
 ## 🎉 Core Features
 
