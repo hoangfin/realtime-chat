@@ -1,10 +1,26 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Node 22",
+	"_version": "22.0.0",
+
 	"compilerOptions": {
-		"module": "NodeNext",
-		"moduleResolution": "nodenext",
-		"target": "ES2020",
-		"sourceMap": true,
+		"baseUrl": ".",
+		"paths": {
+			"@module/*": ["src/module/*"]
+		},
+		"lib": ["es2023"],
+		"module": "node16",
+		"target": "es2022",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"moduleResolution": "node16",
 		"outDir": "dist"
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*"],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"**/*.test.ts"
+	]
 }
