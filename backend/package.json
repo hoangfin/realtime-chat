@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"main": "./src/main.js",
 	"type": "module",
+	"imports": {
+		"#app/*.js": "./dist/*.js"
+	},
 	"scripts": {
 		"build": "tsc",
 		"start": "npm run build && node dist/main.js",
