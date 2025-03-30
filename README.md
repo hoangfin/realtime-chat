@@ -1,10 +1,7 @@
 # Realtime Chat
-An ultimate full-stack project built with a **Modular Monolith** architecture, utilizing:
-- **React/TypeScript** | **Material UI** for the front end.
-- **Kafka** | **Redis** | **PostgreSQL** for backend services.
-
-It delivers low-latency messaging, real-time presence tracking, and a responsive user interface.
-Designed to handle millions of users, it showcases my expertise in full-stack development and modern system design.
+A full-stack project that delivers low-latency messaging, real-time presence tracking,
+and a responsive user interface. Designed to handle millions of users, it showcases my
+expertise in full-stack development and modern system design.
 
 ## 🎉 Core Features
 
@@ -73,64 +70,88 @@ Designed to handle millions of users, it showcases my expertise in full-stack de
 - **Redis**: Low-latency caching, real-time presence tracking, and session management.
 - **PostgreSQL**: Structured data storage, ACID compliance, and advanced querying.
 
-## Backend Design
+## Frontend
+Built with **React - TypeScript** for robust type safety, enhanced by **Zustand** for efficient
+state management and styled with **Material UI** for a sleek, responsive UI - every interaction
+feels effortless and visually captivating.
 
-> You shouldn't start a new project with microservices, even if you're sure your
-> application will be big enough to make it worthwhile.
-> -- [Martin Fowler](https://en.wikipedia.org/wiki/Martin_Fowler_(software_engineer))
+## Backend
 
-### Architecture
+### Microservices Architecture
 
-**Modular Monolith (MM)** is a software architecture that structures the application
-as a single deployment unit (like a traditional monolith) but organizes its internal
-modules in such a way that they are loosely coupled and highly cohesive. Each module
-within the architecture focuses on a specific business domain or functionality,
-similar to how microservices operate, but without the distributed system complexity.
-This modular design enables seamless extraction of individual module into an independent
-(micro)service in the future, should the need arise for greater scalability or distribution.
+### Core Microservices
+- **User Service**
+	- User registration, authentication and profile management.
+	- JWT token generation and validation.
+	- Password reset and account recovery.
+	- User preferences and settings.
+	- Third-party identity providers integration
 
-**Modular Monolith First**: Diving straight into microservices can be fraught with
-challenges due to its inherent [complexities]().
-This approach often leads to a scattered system that requires significant logistical
-effort to glue components together, potentially diverting you from your primary goal:
-delivering the core functionality your software is intended to provide. Instead, begin
-with a **MM** that adheres to these
-[principles](https://gist.github.com/hoangfin/bb291665748466f456f18fa8db648419).
+- **Chat service**: manages chat messages and real-time communication.
+	- Core message handling (sending, receiving, storing)
+	- Message delivery tracking (sent, received, read)
+	- Message persistence.
+	- Read/unread status (Read Receipts)
+
+- **Search Service**: provides search functionality to enable users to find specific messages,
+conversations, or files efficiently.
+	- Message history search.
+	- Keyword and advanced filters search.
+
+- **Presence Service**: is responsible for tracking live user activity. It ensures real-time
+updates are available to other users in the chat.
+	- Online/offline status tracking.
+	- Last seen information.
+	- Typing indicators.
+
+- **Notification service**
+	- Push notifications for new messages.
+	- Email/SMS alerts.
+	- In-app notifications.
+	- Notification preferences.
+
+- **Media service**
+	- File uploads/sharing management.
+	- File validation and Enforce size limitations and validate file types.
+	- Serve images via CDN.
+	- Malware scanning.
+
+### API Gateway
+
+<!-- Contact/Relationship Service
+
+Managing user contacts/friends lists
+
+Handling friend requests and blocking
+
+Following/unfollowing other users -->
 
 
-One common misunderstanding when discussing a **MM** is the assumption that it runs on a single
-server and therefore "cannot scale." In reality, a well-architected **MM** can run on multiple
-servers behind a load balancer, utilize database replicas (slaves) for read operations, and
-still be deployed and operated as a single unit. It scales effectively, often far beyond
-what is typically assumed 👏.
+<!-- Channel/Group Service
 
+Group chat creation and management
 
-### System Design Flow
-Message Sending Example Flow:
+Channel permissions and roles
 
-Frontend: React client sends message via WebSocket to Node.js gateway.
+Topic-based channels (for communities) -->
 
-Node.js:
-Authenticates message (JWT).
-Publishes to Kafka topic: chat.message_sent.
-
-Node.js Backend (Modular Monolith):
-Kafka consumer picks up event.
-Validates & persists to PostgreSQL.
-Emits delivery confirmation via Kafka: chat.message_delivered.
-
-Node.js:
-Subscribed to chat.message_delivered, forwards it via WebSocket to clients.
+### Workflow
 
 ```mermaid
-graph TD
-    A[Client] --> B[API Gateway]
-    B --> C[Auth Service]
-    B --> D[Chat Service]
-    D --> E[Kafka]
-    E --> F[Redis]
-    E --> G[PostgreSQL]
+flowchart TD
+    Client[Client] -- https --> AG[API Gateway]
+	AG -- https --> Client
+    AG --> User[User Service]
+	AG --> Chat[Chat Service]
+	AG --> Search[Search Service]
+	AG --> Notification[Notification Service]
 ```
+<!--
+	B    D[Chat Service]
+    D    E[Kafka]
+    E    F[Redis]
+    E    G[PostgreSQL]
+-->
 
 4. Tech Stack Roles
 Component	Tech	Purpose
