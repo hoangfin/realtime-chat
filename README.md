@@ -146,32 +146,3 @@ flowchart TD
 	AG --> Search[Search Service]
 	AG --> Notification[Notification Service]
 ```
-<!--
-	B    D[Chat Service]
-    D    E[Kafka]
-    E    F[Redis]
-    E    G[PostgreSQL]
--->
-
-4. Tech Stack Roles
-Component	Tech	Purpose
-Frontend	React + TS	UI, WebSocket client
-Real-time Gateway	Node.js	WebSocket server, Kafka producer/consumer
-Backend Core	Node.js	Business logic, REST APIs, Kafka consumers, PostgreSQL
-Database	PostgreSQL	Persistent storage (messages, users, chats)
-Cache/Presence	Redis	Presence tracking, caching user sessions
-Messaging Bus	Kafka	Event bus for decoupled communication
-Deployment	Docker + K8s	Scalability, container orchestration
-Modules (Bounded Contexts) – DDD Focus
-
-
-### Project Structure
-
-| Component     | Description                                                                 |
-|---------------|-----------------------------------------------------------------------------|
-| `controller`  | Exposes APIs (REST/WebSocket) to frontend                                   |
-| `service`     | Business logic (save messages, notify users, etc.)                         |
-| `event`       | Kafka consumers for message events                                         |
-| `repository`  | PostgreSQL access (via Spring Data JPA)                                    |
-| `model`       | Entities mapped to DB (e.g., Message)                                      |
-| `dto`         | Data Transfer Objects (incoming/outgoing data)                             |
