@@ -1,26 +1,21 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "Node 22",
-	"_version": "22.0.0",
-
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"#app/*": ["src/*"]
-		},
-		"lib": ["es2023"],
-		"module": "node16",
-		"target": "es2022",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"moduleResolution": "node16",
-		"outDir": "dist"
-	},
-	"include": ["src/**/*"],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"**/*.test.ts"
-	]
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }
