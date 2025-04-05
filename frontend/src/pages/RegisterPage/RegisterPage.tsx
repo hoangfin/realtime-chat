@@ -1,5 +1,5 @@
 import { Button, Stack, StackProps, styled, SxProps, TextField, TextFieldProps, Typography } from "@mui/material";
-import { useAuth } from "@src/stores";
+import { useAuth } from "@app/modules/auth/stores";
 import { FormEvent } from "react";
 import { UploadButton } from "./UploadButton";
 

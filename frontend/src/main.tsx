@@ -1,5 +1,5 @@
-import { createRoot } from "react-dom/client"
-import { ThemeProvider } from "@emotion/react"
+import { createRoot } from "react-dom/client";
+import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { theme } from "./theme.ts";
 import App from "./App.tsx";

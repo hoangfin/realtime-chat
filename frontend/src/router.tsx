@@ -1,9 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { HomePage, LoginPage, RegisterPage } from "@src/components/pages";
-import { auth, getUser } from "@src/services/firebase";
-import { useAuth } from "@src/stores";
-import type { User } from "@src/types";
+import { HomePage, LoginPage, RegisterPage } from "@app/pages";
+import { auth, getUser } from "@app/common/services/firebase";
+import { useAuth } from "@app/modules/auth/stores";
+import type { User } from "@app/types";
 
 const authLoader = (): Promise<User | null> => new Promise((resolve, reject) => {
 	useAuth.getState().setLoggingIn(true);

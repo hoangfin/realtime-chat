@@ -1,5 +1,5 @@
 import { Button, styled } from "@mui/material";
-import { upload } from "@src/services/firebase";
+import { upload } from "@app/common/services/firebase";
 import { ChangeEventHandler, useState } from "react";
 
 const HiddenInput = styled("input")({

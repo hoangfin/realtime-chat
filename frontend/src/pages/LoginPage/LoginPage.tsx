@@ -2,7 +2,7 @@ import { type ChangeEventHandler, type FormEventHandler, useState } from "react"
 import { Alert, Button, Dialog, Stack, TextField, Typography } from "@mui/material";
 import { AnimatedBorder } from "./AnimatedBorder";
 import { validate, type ValidationError } from "./validate";
-import { useAuth } from "@src/stores";
+import { useAuth } from "@app/modules/auth/stores";
 
 export function LoginPage(): JSX.Element {
 	const [error, setError] = useState<ValidationError>({});

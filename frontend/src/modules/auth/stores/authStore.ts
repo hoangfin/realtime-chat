@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { auth, createUser, getUser } from "@src/services/firebase";
+import { auth, createUser, getUser } from "@app/common/services/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { User } from "@src/types";
+import { User } from "@app/types";
 
-type AuthState = {
+export type AuthState = {
 	user: User | null,
 	setUser: (user: User | null) => void,
 	login: (email: string, password: string) => Promise<void>,
