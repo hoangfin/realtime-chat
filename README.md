@@ -3,6 +3,8 @@ A full-stack project that delivers low-latency messaging, real-time presence tra
 and a responsive user interface. Designed to handle millions of users, it showcases my
 expertise in full-stack development and modern system design.
 
+![Preview](https://github.com/tmKamal/hosted-images/blob/master/under-construction/Document.gif?raw=true)
+
 ## 🎉 Core Features
 
 - **Real-Time Messaging**
