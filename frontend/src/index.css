@@ -1,15 +1,11 @@
-/* :root {
+:root {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
-	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-} */
+}
 
 body {
 	width: 100vw;
@@ -19,9 +15,8 @@ body {
 	padding: 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
-/* #root {
+#root {
 	flex: 1
-} */
+}

@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
 	typography: {
-		fontFamily: "Nunito",
+		fontFamily: "Poppins",
 		h1: { fontWeight: 900, fontSize: "5rem", lineHeight: "1" },
 		h2: { fontWeight: 900, fontSize: "3rem", lineHeight: "1.2" },
 		h3: { fontWeight: 400, fontSize: "3rem", lineHeight: "1.2" },
@@ -12,6 +12,15 @@ export const theme = createTheme({
 	},
 
 	components: {
+		MuiLink: {
+			styleOverrides: {
+				root: {
+					color: "inherit",
+					textDecoration: "none"
+				}
+			}
+		},
+
 		MuiButton: {
 			styleOverrides: {
 				root: {
@@ -22,6 +31,4 @@ export const theme = createTheme({
 			}
 		}
 	},
-
-	palette: { mode: "dark" }
 });

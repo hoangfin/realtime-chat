@@ -10,22 +10,37 @@
 // 	borderRadius: "12px"
 // };
 
-import { Stack } from "@mui/material";
+import { Button, Link, Stack, Typography } from "@mui/material";
 import { SideMenu } from "./SideMenu";
 import { Chat } from "./Chat";
 import { AccountCenter } from "./AccountCenter";
+import { Header } from "./Header";
+import { Link as RouterLink } from "react-router-dom";
 
 export function HomePage(): JSX.Element {
 	return (
-		<Stack
-			component="main"
-			// width="95vw"
-			// height="95vh"
-			direction="row"
-		>
-			<SideMenu />
-			<Chat />
-			<AccountCenter />
-		</Stack>
+		<>
+			<Header />
+			<Stack
+				component="main"
+				// width="95vw"
+				// height="95vh"
+				direction="row"
+			>
+				<div>
+					<Typography component="h1" variant="h3">
+						Empower Connections with VietChat
+					</Typography>
+					<Typography>
+						<strong>Real-time</strong> communication, providing both visual connection and
+						immediate answers to customers inquiries
+					</Typography>
+					<Button component={RouterLink} to="/login" variant="contained">Start Now</Button>
+				</div>
+				{/* <SideMenu />
+				<Chat />
+				<AccountCenter /> */}
+			</Stack>
+		</>
 	);
 };
