@@ -1,6 +1,6 @@
-import { HomeOutlined } from "@app/assets/icons";
-import { Link, Stack, SxProps } from "@mui/material";
+import { Link, Stack, StackProps, type SxProps } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { HomeOutlined, Logo } from "@app/assets/icons";
 
 const LinkSxProps: SxProps = {
 	display: "flex",
@@ -8,26 +8,30 @@ const LinkSxProps: SxProps = {
 	alignItems: "center",
 	paddingX: 1.5,
 	paddingY: 1,
-	bgcolor: "#f8f8f8",
 	textAlign: "center",
 };
 
-export function Header(): JSX.Element {
+export function NavBar(props: StackProps): JSX.Element {
 	return (
 		<Stack
-			component="header"
 			direction="row"
 			justifyContent="space-between"
+			alignItems="center"
 			whiteSpace="nowrap"
-			padding={2}
+			paddingY={2}
+			{...props}
 		>
-			<Stack component="nav" direction="row">
-				<Link component={RouterLink} to="/" sx={{ ...LinkSxProps, borderRadius: "10px 0 0 10px"}}>
+			<Link component={RouterLink} to="/">
+				<Logo sx={{ display: "block" }}/>
+			</Link>
+
+			<Stack component="nav" direction="row" bgcolor="#DBDBDB" borderRadius={2}>
+				<Link component={RouterLink} to="/" sx={LinkSxProps}>
 					<HomeOutlined />
 				</Link>
 				<Link component={RouterLink} to="/about" sx={LinkSxProps}>About</Link>
 				<Link component={RouterLink} to="/features" sx={LinkSxProps}>Features</Link>
-				<Link component={RouterLink} to="/contact" sx={{ ...LinkSxProps, borderRadius: "0 10px 10px 0"}}>Contact</Link>
+				<Link component={RouterLink} to="/contact" sx={LinkSxProps}>Contact</Link>
 			</Stack>
 
 			<Link
