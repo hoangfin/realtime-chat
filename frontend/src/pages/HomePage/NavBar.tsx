@@ -1,15 +1,32 @@
-import { Link, Stack, StackProps, type SxProps } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import {
+	type LinkProps as MuiLinkProps,
+	type StackProps,
+	Link as MuiLink,
+	Stack
+} from "@mui/material";
+
+import {
+	type LinkProps as RouterLinkProps,
+	Link as RouterLink
+} from "react-router-dom";
+
 import { HomeOutlined, Logo } from "@app/assets/icons";
 
-const LinkSxProps: SxProps = {
-	display: "flex",
-	justifyContent: "center",
-	alignItems: "center",
-	paddingX: 1.5,
-	paddingY: 1,
-	textAlign: "center",
-};
+type LinkProps = Omit<MuiLinkProps, "href"> & RouterLinkProps;
+
+const Link = (props: LinkProps): JSX.Element => {
+	return (
+		<MuiLink
+			component={RouterLink}
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
+			textAlign="center"
+			{...props}
+		>
+		</MuiLink>
+	);
+}
 
 export function NavBar(props: StackProps): JSX.Element {
 	return (
@@ -21,24 +38,20 @@ export function NavBar(props: StackProps): JSX.Element {
 			paddingY={2}
 			{...props}
 		>
-			<Link component={RouterLink} to="/">
+			<Link to="/">
 				<Logo sx={{ display: "block" }}/>
 			</Link>
 
 			<Stack component="nav" direction="row" bgcolor="#DBDBDB" borderRadius={2}>
-				<Link component={RouterLink} to="/" sx={LinkSxProps}>
-					<HomeOutlined />
-				</Link>
-				<Link component={RouterLink} to="/about" sx={LinkSxProps}>About</Link>
-				<Link component={RouterLink} to="/features" sx={LinkSxProps}>Features</Link>
-				<Link component={RouterLink} to="/contact" sx={LinkSxProps}>Contact</Link>
+				<Link to="/"><HomeOutlined /></Link>
+				<Link to="/about">About</Link>
+				<Link to="/features">Features</Link>
+				<Link to="/contact">Contact</Link>
 			</Stack>
 
 			<Link
-				component={RouterLink}
 				to="/login"
 				sx={{
-					...LinkSxProps,
 					borderRadius: "10px"
 				}}
 			>
