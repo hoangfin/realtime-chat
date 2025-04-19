@@ -9,7 +9,7 @@ export class User {
     email!: string;
 
 	@Property({ type: "boolean", nullable: false, default: false, name: "email_verified" })
-    emailVerified: boolean = false;
+    emailVerified?: boolean = false;
 
 	@Property({ type: "string", nullable: false, length: 50, unique: true })
     username!: string;
@@ -24,13 +24,13 @@ export class User {
     avatarUrl?: string;
 
 	@Property({ type: "boolean", nullable: false, default: true, name: "is_active" })
-    isActive: boolean = true;
+    isActive?: boolean = true;
 
 	@Property({ type: "timestamptz", nullable: true, defaultRaw: "NOW()", name: "last_login" })
     lastLogin?: Date;
 
 	@Property({ type: "timestamptz", nullable: false, defaultRaw: "NOW()", name: "created_at" })
-    createdAt!: Date;
+    createdAt?: Date;
 
 	@Property({
 		type: "timestamptz",
@@ -39,5 +39,5 @@ export class User {
 		onUpdate: () => new Date(),
 		name: "updated_at"
 	})
-    updatedAt!: Date;
+    updatedAt?: Date;
 }
