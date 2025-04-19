@@ -17,8 +17,18 @@ import { ConfigService } from "@nestjs/config";
 				entities: ["dist/**/*.entity.js"],
 				entitiesTs: ["src/**/*.entity.ts"],
 				debug: true,
+
+				migrations: {
+					path: "dist/database/migrations",
+					pathTs: "src/database/migrations",
+					glob: "!(*.d).{js,ts}",
+					transactional: true,
+					disableForeignKeys: true,
+					allOrNothing: true,
+					emit: "ts",
+				},
 			}),
 		}),
 	],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }
