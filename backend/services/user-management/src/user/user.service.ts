@@ -1,11 +1,24 @@
 import { Injectable } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
+import { CreateUserDto, UpdateUserDto } from "./dto";
+import { User } from "./entities/user.entity";
+import { UserRepository } from "./user.repository";
+import { RequiredEntityData } from "@mikro-orm/core";
 
 @Injectable()
 export class UserService {
-	create(createUserDto: CreateUserDto) {
-		return "This action adds a new user";
+	constructor(private readonly repo: UserRepository) {}
+
+	async create(createUserDto: CreateUserDto): Promise<User> {
+		// validate createUserDto
+
+		const { password, ...rest } = createUserDto;
+		const userData: RequiredEntityData<User> = {
+			...rest,
+			passwordHash: "Hello"
+		};
+		console.log(userData);
+		const user = await this.repo.createUser(userData);
+		return user;
 	}
 
 	findAll() {
