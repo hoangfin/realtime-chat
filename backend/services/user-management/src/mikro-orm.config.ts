@@ -7,7 +7,7 @@ config();
 
 const configService = new ConfigService();
 
-export const baseConfig = defineConfig({
+export const baseOptions = defineConfig({
 	host: configService.getOrThrow<string>("POSTGRES_HOST"),
 	port: configService.getOrThrow<number>("POSTGRES_PORT"),
 	dbName: configService.getOrThrow<string>("POSTGRES_DB"),
@@ -18,7 +18,7 @@ export const baseConfig = defineConfig({
 });
 
 export default defineConfig({
-	...baseConfig,
+	...baseOptions,
 	migrations: {
 		path: "dist/migrations",
 		pathTs: "src/migrations",
