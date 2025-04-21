@@ -11,12 +11,12 @@ import { SessionModule } from './session/session.module';
 import { PasswordRecoveryModule } from './password-recovery/password-recovery.module';
 import { ValidationModule } from './validation/validation.module';
 import { MikroOrmModule } from "@mikro-orm/nestjs";
-import { baseConfig } from "./mikro-orm.config";
+import { baseOptions } from "./mikro-orm.config";
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({ isGlobal: true }),
-		MikroOrmModule.forRoot(baseConfig),
+		MikroOrmModule.forRoot(baseOptions),
 		UserModule,
 		AuthModule,
 		ProfileModule,

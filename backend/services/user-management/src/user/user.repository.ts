@@ -16,8 +16,8 @@ export class UserRepository {
 		return this.em.findAll(User);
 	}
 
-	async findOne(id: string): Promise<User | null> {
-		return this.em.findOne(User, { id })
+	async findOne(id: string): Promise<User> {
+		return this.em.findOneOrFail(User, { id })
 	}
 
 	async update(id: string, userData: EntityData<User>): Promise<User> {

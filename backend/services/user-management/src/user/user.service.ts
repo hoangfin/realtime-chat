@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { CreateUserDto, UpdateUserDto } from "./dto";
 import { User } from "./entities/user.entity";
 import { UserRepository } from "./user.repository";
-import { RequiredEntityData } from "@mikro-orm/core";
+import type { EntityData, RequiredEntityData } from "@mikro-orm/core";
 
 @Injectable()
 export class UserService {
-	constructor(private readonly repo: UserRepository) {}
+	constructor(private readonly userRepository: UserRepository) {}
 
 	async create(createUserDto: CreateUserDto): Promise<User> {
 		// validate createUserDto
@@ -17,23 +17,30 @@ export class UserService {
 			passwordHash: "Hello"
 		};
 		console.log(userData);
-		const user = await this.repo.createUser(userData);
+		const user = await this.userRepository.createUser(userData);
 		return user;
 	}
 
-	findAll() {
-		return `This action returns all user`;
+	async findAll(): Promise<User[]> {
+		return this.userRepository.findAll();
 	}
 
-	findOne(id: number) {
-		return `This action returns a #${id} user`;
+	async findOne(id: string): Promise<User> {
+		return this.userRepository.findOne(id);
 	}
 
-	update(id: number, updateUserDto: UpdateUserDto) {
-		return `This action updates a #${id} user`;
+	async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+		if (updateUserDto.password) {
+
+		}
+		const userData: EntityData<User> = {
+
+		};
+
+		return this.userRepository.update(id, updateUserDto);
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} user`;
+	async remove(id: string): Promise<void> {
+		return this.userRepository.remove(id);
 	}
 }
